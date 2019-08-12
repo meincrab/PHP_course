@@ -1,0 +1,19 @@
+CREATE TABLE `harkka`.`userdb` (
+  `UserID` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `nickname` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NULL,
+  PRIMARY KEY (`UserID`),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC),
+  UNIQUE INDEX `nickname_UNIQUE` (`nickname` ASC));
+
+  
+  CREATE TABLE `harkka`.`courselist` (
+  `courseId` INT NOT NULL AUTO_INCREMENT,
+  `courseName` VARCHAR(45) NULL,
+  `courseData` VARCHAR(45) NULL,
+  `courseStatus` VARCHAR(45) NULL,
+  `Grade` INT NULL,
+  `Additional` VARCHAR(255) NULL,
+  PRIMARY KEY (`courseId`));

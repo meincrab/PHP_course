@@ -4,28 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link href="css/layout.css" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-    Aihe : muistikirja/kurssilista dynaamisella latauksella
-    Toteutus : PHP + Javascript
-    Success:
-    -Registration System
-    -Login System
-    -User stays logged in
-    -Password hashing (used new password_hash and password_verify function)
-    -Page header and footer dynamicly loading from file.
-    -User can add new courses using php forms
-    -New courses are automatically added into select-list
-    -You can choose and display course-info using ajax
-    -xml file loaded with ajax , with some helpful links
-    
-    Need to be done:
-    -admin feature, user with permissions to delete info from xml file or database using gui.
-    -personal infromation for every registered user.
-    -page appearence
-    -protection for all php pages.
+	
+    <h2>Harjoitustyö TTMS0900/TTMS0500</h2>
+	<h3>Alexander Andreev K8684 TTV16S3 Web-ohjelmointi/Web-palvelinohjelmointi</h3>
+	<p>Harjoitustyön tavoitteena oli kurssilista sivuston toteuttaminen, jolla käyttäjä pystyisi nähdä kurssia, lisätä niitä, muokkaa, säilyttää lisätietoja xml tai json tiedostossa. 
+	Käyttäjäkokemus alkaa tunnuksen luomisella. Käyttäjä syöttää käyttäjätunnuksen, salasanan, kutsumanimen ja sähköpostiosoitteen(vapaehtoisesti).</p>
+	<p>Tunnuksen luomiseen jälkeen, käyttäjä pystyy kirjautumaan sisään. Joko adminina, tai normikäyttäjänä.</p>
+	<p>Normikäyttäjänä käyttäjä voi lisätä kursseja, muokkaa niitä(jäi toteuttamatta) ja nähdä niitä.<br>
+	Adminina edellisten toimeen lisäksi, käyttäjä voisi myös poistaa kursseja. </p>
+	Tekninen puoli: <br>
+	On olemassa SQL tietokanta, jossa on kaksi taulua käyttäjät ja taulut.<br>
+	Käyttäjä taulussa säilytetään käyttäjätunnuksen ja password_hash funktion avulla hashatut salasanat. Kun käyttäjä yrittää kirjautua sisään, ohjelma tarkistaa onko se admin
+	(jonka tunnus ja salasana ovat kovakoodatut ohjelmakoodin), jos ei ohjelmaa tarkista onko käyttäjä olemassa ja jos on, tarkistaa hänen salasanaa password_verify avulla. <br> 
+	
+	
+	Toteuttamatta ovat jäänet : <br> 
+	Oman taulun luomiseen jokaiselle käyttäjälle <br> 
+	Mahdollisuus muokkaa kurssitietoja <br> 
+	Alkuperäinen suunnitelma, että jokainen toiminto haetaan sivulle ja toetuttaan ajaxin+jqueryn avulla <br> 
+	Mahdollisuus lataa ja muokkaa xml tiedostoja käyttöliittymän kautta. <br> 
+	Kaunis käyttöliittymä <br> 
+
+	
+	Käyttöliittymässä käyttäjä näkee dropdown listalta kaikki kurssit ja niiden id, kursseja haetaan listaan dynamisesti ajaxin avulla. <br>
+	Myös pääsivulta löytyy kurssilisäys lomake ja mahdollisuus reaaliaikana etsiä jotain merkintöjä notepadista, eli xml tiedosta.
+	<p> Itsearviointi: </p>
+	<p>TTMS0900 – 1,  TTMS0500 - 1 Suuri osa toiminnallisuudesta jäi toteuttamatta, edes ”helppoihin” ominaisuuksiin meni uskomattomasti paljon aikaa. </p>
+	<p>Käytetty aika : 60+ tuntia, jos lisätään suunnitteluaika 70+ </p>
+	<p>Olin liian itsevarma harjoitustyön alkuvaiheessa. Ensiksi suunnitelmaan meni liikaa aikaa, kun aloitin tekemään olen laskenut ajan niin, että 
+	”sisäänkirjautumiseen menee noin 4-5 tuntia aikaa, päätoiminnallisuuden noin 15-20 ja loppuaikaa jää hiomiseen.
+	Pelkkä sisäänkirjautumisen toteuttamiseen meni yli 25 tuntia , josta suurin osa meni syntyvien virheiden korjamiseen.</p>
 
 
+	CREATE TABLE `harkka`.`userdb` ( <br>
+  `UserID` INT NOT NULL AUTO_INCREMENT, <br>
+  `username` VARCHAR(45) NOT NULL, <br>
+  `password` VARCHAR(255) NOT NULL, <br>
+  `nickname` VARCHAR(45) NOT NULL, <br>
+  `email` VARCHAR(45) NULL,<br>
+  PRIMARY KEY (`UserID`),<br>
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC),<br>
+  UNIQUE INDEX `nickname_UNIQUE` (`nickname` ASC));<br>
+<br>
+  
+  CREATE TABLE `harkka`.`courselist` (<br>
+  `courseId` INT NOT NULL AUTO_INCREMENT,<br>
+  `courseName` VARCHAR(45) NULL,<br>
+  `courseData` VARCHAR(45) NULL,<br>
+  `courseStatus` VARCHAR(45) NULL,<br>
+  `Grade` INT NULL,<br>
+  `Additional` VARCHAR(255) NULL,<br>
+  PRIMARY KEY (`courseId`));<br>
+
+  
+	<img src="kuva.png" alt="Smiley face" height="550">
 </body>
 </html>
